@@ -1,6 +1,8 @@
 package data.models.HumanBeingModel;
 
+import java.nio.ByteBuffer;
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class HumanBeing implements Comparable<HumanBeing> {
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
@@ -14,41 +16,59 @@ public class HumanBeing implements Comparable<HumanBeing> {
     private long minutesOfWaiting;
     private WeaponType weaponType; //Поле не может быть null
     private Car car; //Поле может быть null
-    private float absoluteParameter;
 
-    public HumanBeing() {};
-
-    public HumanBeing(
-            String name,
-            Coordinates coordinates,
-            Boolean realHero,
-            Boolean hasToothpick,
-            String soundtrackName,
-            WeaponType weaponType,
-            Car car
-    ) {
-
-    }
-
-    public HumanBeing(
-            String name,
-            Coordinates coordinates,
-            Boolean realHero,
-            Boolean hasToothpick,
-            double impactSpeed,
-            String soundtrackName,
-            long minutesOfWaiting,
-            WeaponType weaponType,
-            Car car
-    ) {
-
+    private HumanBeing(Integer id, String name, Coordinates coordinates, LocalDate creationDate, Boolean realHero, Boolean hasToothpick, double impactSpeed, String soundtrackName, long minutesOfWaiting, WeaponType weaponType, Car car) throws NullPointerException {
+        if (name == null) throw new NullPointerException("Поле name не может быть пустым!");
+        if (coordinates == null) throw new NullPointerException("Поле coordinates не может быть пустым!");
+        if (realHero == null) throw new NullPointerException("Поле realHero не может быть пустым!");
+        if (hasToothpick == null) throw new NullPointerException("Поле hasToothpick не может быть пустым!");
+        if (soundtrackName == null) throw new NullPointerException("Поле soundtrackName не может быть пустым!");
+        if (weaponType == null) throw new NullPointerException("Поле weaponType не может быть пустым!");
+        if (car == null) throw new NullPointerException("Поле car не может быть пустым!");
+        this.id = id;
+        this.name = name;
+        this.coordinates = coordinates;
+        this.creationDate = creationDate;
+        this.realHero = realHero;
+        this.hasToothpick = hasToothpick;
+        this.impactSpeed = impactSpeed;
+        this.soundtrackName = soundtrackName;
+        this.minutesOfWaiting = minutesOfWaiting;
+        this.weaponType = weaponType;
+        this.car = car;
     }
 
 
+    public HumanBeing(String name, Coordinates coordinates, Boolean realHero, Boolean hasToothpick, double impactSpeed, String soundtrackName, long minutesOfWaiting, WeaponType weaponType, Car car) throws NullPointerException {
+        UUID uuid = UUID.randomUUID();
+        this.id = ByteBuffer.wrap(uuid.toString().getBytes()).getInt();
+        if (name == null) throw new NullPointerException("Поле name не может быть пустым!");
+        if (coordinates == null) throw new NullPointerException("Поле coordinates не может быть пустым!");
+        if (realHero == null) throw new NullPointerException("Поле realHero не может быть пустым!");
+        if (hasToothpick == null) throw new NullPointerException("Поле hasToothpick не может быть пустым!");
+        if (soundtrackName == null) throw new NullPointerException("Поле soundtrackName не может быть пустым!");
+        if (weaponType == null) throw new NullPointerException("Поле weaponType не может быть пустым!");
+        if (car == null) throw new NullPointerException("Поле car не может быть пустым!");
+        this.name = name;
+        this.coordinates = coordinates;
+        this.creationDate = LocalDate.now();
+        this.realHero = realHero;
+        this.hasToothpick = hasToothpick;
+        this.impactSpeed = impactSpeed;
+        this.soundtrackName = soundtrackName;
+        this.minutesOfWaiting = minutesOfWaiting;
+        this.weaponType = weaponType;
+        this.car = car;
+    }
+
+    public static HumanBeing parseHumanBeing(Integer id, String name, Coordinates coordinates, LocalDate creationDate, Boolean realHero, Boolean hasToothpick, double impactSpeed, String soundtrackName, long minutesOfWaiting, WeaponType weaponType, Car car) {
+        return new HumanBeing(id, name, coordinates, creationDate, realHero, hasToothpick, impactSpeed, soundtrackName, minutesOfWaiting, weaponType, car);
+    }
 
     @Override
     public int compareTo(HumanBeing other) {
-        return Double.compare(absoluteParameter, other.absoluteParameter);
+        return 1;
+//        return Double.compare(absoluteParameter, other.absoluteParameter);
     }
 
     public void setId(Integer id) {
@@ -95,4 +115,64 @@ public class HumanBeing implements Comparable<HumanBeing> {
         this.car = car;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    @Override
+    public String toString() {
+        return "HumanBeing{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", coordinates=" + coordinates +
+                ", creationDate=" + creationDate +
+                ", realHero=" + realHero +
+                ", hasToothpick=" + hasToothpick +
+                ", impactSpeed=" + impactSpeed +
+                ", soundtrackName='" + soundtrackName + '\'' +
+                ", minutesOfWaiting=" + minutesOfWaiting +
+                ", weaponType=" + weaponType +
+                ", car=" + car +
+                '}';
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public Boolean getRealHero() {
+        return realHero;
+    }
+
+    public Boolean getHasToothpick() {
+        return hasToothpick;
+    }
+
+    public double getImpactSpeed() {
+        return impactSpeed;
+    }
+
+    public String getSoundtrackName() {
+        return soundtrackName;
+    }
+
+    public long getMinutesOfWaiting() {
+        return minutesOfWaiting;
+    }
+
+    public WeaponType getWeaponType() {
+        return weaponType;
+    }
+
+    public Car getCar() {
+        return car;
+    }
 }

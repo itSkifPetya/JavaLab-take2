@@ -8,4 +8,20 @@ public class Coordinates {
         this.x = x;
         this.y = y;
     }
+
+    public double getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public String toString() {
+        return "Coordinates{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

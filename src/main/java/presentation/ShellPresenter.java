@@ -9,7 +9,7 @@ public class ShellPresenter implements Presenter {
 
     private ShellPresenter() {}
 
-    public static ShellPresenter getShell() {
+    public static ShellPresenter getInstanse() {
         if(shell == null) {
             shell = new ShellPresenter();
         }
@@ -24,6 +24,13 @@ public class ShellPresenter implements Presenter {
     @Override
     public String get() {
         Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
+    @Override
+    public String get(String msg) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(msg);
         return scanner.nextLine();
     }
 }
