@@ -4,6 +4,7 @@ import data.models.HumanBeingModel.Car;
 import data.models.HumanBeingModel.Coordinates;
 import data.models.HumanBeingModel.HumanBeing;
 import data.models.HumanBeingModel.WeaponType;
+import domain.DAO.HumanBeingDataInit;
 import domain.DAO.HumanBeingRepo;
 
 import java.io.*;
@@ -12,13 +13,12 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Scanner;
 
-public class CSVLocalRepository implements HumanBeingRepo {
+public class CSVLocalRepository implements HumanBeingRepo, HumanBeingDataInit {
     private FileWriter fileWriter;
     private static CSVLocalRepository instance;
     private String fileName = "FileName";
 
-    private CSVLocalRepository() {
-    }
+    private CSVLocalRepository() {}
 
     // Реализация singleton класса
     public static CSVLocalRepository getInstance() {
@@ -45,8 +45,7 @@ public class CSVLocalRepository implements HumanBeingRepo {
             System.out.println(e);
         }
     }
-
-
+// id,name,coordX,coordY,creationDate,realHero,hasToothpick,impactSpeed,soundtrackName,miutesOfWaiting,weaponType,car
     @Override
     public void writeData(Hashtable<Integer, HumanBeing> collection) {
         again:
@@ -60,9 +59,28 @@ public class CSVLocalRepository implements HumanBeingRepo {
 //            System.out.println(e);
 //            System.out.println(collection);
             fileWriterInit(fileName);
-            break again;
+//            break again;
         }
     }
+
+// name,coordX,coordY,realHero,hasToothpick,impactSpeed,soundtrackName,minutesOfWaiting,weaponType,car
+    @Override
+    public void writeData(String filePath, String data) {
+//        String[] fields = data.split(",");
+        ArrayList<String[]> dataset = new ArrayList<>();
+        for (String x : data.split("\n")) {
+            dataset.add(x.split(","));
+        }
+//        System.out.println(dataset);
+        for (var x : dataset) {
+            for (var y : x) {
+                System.out.print(y + "\t");
+            }
+            System.out.print("\n");
+        }
+
+    }
+
 
     @Override
     public Hashtable<Integer, HumanBeing> getData(String filePath) {
@@ -125,6 +143,5 @@ public class CSVLocalRepository implements HumanBeingRepo {
 
         return collection;
     }
-
 
 }

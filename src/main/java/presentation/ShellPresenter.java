@@ -5,15 +5,15 @@ import presentation.presenterrequirements.Presenter;
 import java.util.Scanner;
 
 public class ShellPresenter implements Presenter {
-    private static ShellPresenter shell;
+    private static ShellPresenter instance;
 
     private ShellPresenter() {}
 
     public static ShellPresenter getInstanse() {
-        if(shell == null) {
-            shell = new ShellPresenter();
+        if(instance == null) {
+            instance = new ShellPresenter();
         }
-        return shell;
+        return instance;
     }
 
     @Override

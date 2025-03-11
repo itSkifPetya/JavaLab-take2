@@ -35,13 +35,17 @@ public class Application {
         }
     }
 
-    private void interactOpt(ShellPresenter presenter) {
-        System.out.println("Вы в интерактивном режиме");
+    private void interactOpt(ShellPresenter io) {
+        io.put("Вы в интерактивном режиме! Начните с команды help");
+        while (true) {
+            String inp = io.get("> ");
+
+        }
 
     }
 
-    private void adminOpt(ShellPresenter presenter) {
-        System.out.println("Вы в админке");
+    private void adminOpt(ShellPresenter io) {
+        io.put("Вы в админке!");
     }
 
 
