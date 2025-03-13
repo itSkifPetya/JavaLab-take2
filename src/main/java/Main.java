@@ -19,7 +19,8 @@ public class Main {
 //        app.start();
         Scanner sc = new Scanner(System.in);
         var data = sc.nextLine();
-        repo.writeData("", data);
+        repo.fileWriterInit("inp1");
+        repo.writeData(data);
 
     }
 }

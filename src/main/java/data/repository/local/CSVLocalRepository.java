@@ -4,7 +4,7 @@ import data.models.HumanBeingModel.Car;
 import data.models.HumanBeingModel.Coordinates;
 import data.models.HumanBeingModel.HumanBeing;
 import data.models.HumanBeingModel.WeaponType;
-import domain.DAO.HumanBeingDataInit;
+import domain.DAO.HumanBeingShellInit;
 import domain.DAO.HumanBeingRepo;
 
 import java.io.*;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Scanner;
 
-public class CSVLocalRepository implements HumanBeingRepo, HumanBeingDataInit {
+public class CSVLocalRepository implements HumanBeingRepo, HumanBeingShellInit {
     private FileWriter fileWriter;
     private static CSVLocalRepository instance;
     private String fileName = "FileName";
@@ -46,6 +46,7 @@ public class CSVLocalRepository implements HumanBeingRepo, HumanBeingDataInit {
         }
     }
 // id,name,coordX,coordY,creationDate,realHero,hasToothpick,impactSpeed,soundtrackName,miutesOfWaiting,weaponType,car
+
     @Override
     public void writeData(Hashtable<Integer, HumanBeing> collection) {
         again:
@@ -65,20 +66,18 @@ public class CSVLocalRepository implements HumanBeingRepo, HumanBeingDataInit {
 
 // name,coordX,coordY,realHero,hasToothpick,impactSpeed,soundtrackName,minutesOfWaiting,weaponType,car
     @Override
-    public void writeData(String filePath, String data) {
-//        String[] fields = data.split(",");
-        ArrayList<String[]> dataset = new ArrayList<>();
-        for (String x : data.split("\n")) {
-            dataset.add(x.split(","));
-        }
-//        System.out.println(dataset);
-        for (var x : dataset) {
-            for (var y : x) {
-                System.out.print(y + "\t");
-            }
-            System.out.print("\n");
-        }
-
+    public boolean writeData(String data) {
+        if (data == "0") return false;
+        String[] fields = data.split(",");
+        System.out.println(fields);
+        return true;
+        /*
+        TODO: Реализовать построчный ввод данных (по одному объекту)
+        TODO: пока введенная информация не 0, принимать объекты и преобразовывать
+        TODO: сделать новый класс и интерфейс для обработки данных, введённых в админке
+        TODO: и перенести туда этот класс; после этого перейти к работе над интерактивным режимом
+        TODO:
+         */
     }
 
 
