@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Scanner;
 
-public class CSVLocalRepository implements HumanBeingRepo, HumanBeingShellInit {
+public class CSVLocalRepository implements HumanBeingRepo {
     private FileWriter fileWriter;
     private static CSVLocalRepository instance;
     private String fileName = "FileName";
@@ -65,20 +65,10 @@ public class CSVLocalRepository implements HumanBeingRepo, HumanBeingShellInit {
     }
 
 // name,coordX,coordY,realHero,hasToothpick,impactSpeed,soundtrackName,minutesOfWaiting,weaponType,car
-    @Override
-    public boolean writeData(String data) {
-        if (data == "0") return false;
-        String[] fields = data.split(",");
-        System.out.println(fields);
-        return true;
-        /*
-        TODO: Реализовать построчный ввод данных (по одному объекту)
-        TODO: пока введенная информация не 0, принимать объекты и преобразовывать
-        TODO: сделать новый класс и интерфейс для обработки данных, введённых в админке
-        TODO: и перенести туда этот класс; после этого перейти к работе над интерактивным режимом
-        TODO:
-         */
-    }
+
+//    public HumanBeing writeData(String data) {
+//
+//    }
 
 
     @Override

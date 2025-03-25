@@ -6,18 +6,14 @@ import presentation.ShellPresenter;
 
 import java.util.Hashtable;
 
-public class ShowCommand implements Command {
-
+public class ClearCommand implements Command {
     @Override
     public void execute(Hashtable<Integer, HumanBeing> collection, String[] args) {
         ShellPresenter io = ShellPresenter.getInstanse();
         if (collection.isEmpty()) {
-            io.put("Коллекция не содержит элементов.");
+            io.put("Коллекция уже пуста!");
         } else {
-            for (Integer key : collection.keySet()) {
-                io.put(key.toString() + ": ");
-                io.put(collection.get(key).toString());
-            }
+            collection.clear();
         }
     }
 }

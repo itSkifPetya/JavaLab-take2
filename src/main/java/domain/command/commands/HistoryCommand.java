@@ -1,23 +1,23 @@
 package domain.command.commands;
 
 import data.models.HumanBeingModel.HumanBeing;
+import domain.HistoryKeeper;
 import domain.command.Command;
 import presentation.ShellPresenter;
 
 import java.util.Hashtable;
+import java.util.Stack;
 
-public class ShowCommand implements Command {
-
+public class HistoryCommand implements Command {
     @Override
     public void execute(Hashtable<Integer, HumanBeing> collection, String[] args) {
         ShellPresenter io = ShellPresenter.getInstanse();
-        if (collection.isEmpty()) {
-            io.put("Коллекция не содержит элементов.");
-        } else {
-            for (Integer key : collection.keySet()) {
-                io.put(key.toString() + ": ");
-                io.put(collection.get(key).toString());
-            }
+        HistoryKeeper historyKeeper = HistoryKeeper.getInstance();
+        Stack<String> history = historyKeeper.getHistory();
+        for (int i = 0; i <= 5; i++) {
+            io.put(history.pop());
+            history.removeLast();
         }
+
     }
 }

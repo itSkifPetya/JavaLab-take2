@@ -4,13 +4,12 @@ import data.models.HumanBeingModel.Car;
 import data.models.HumanBeingModel.Coordinates;
 import data.models.HumanBeingModel.HumanBeing;
 import data.models.HumanBeingModel.WeaponType;
-import data.repository.local.CSVLocalRepository;
 import domain.command.Command;
 import presentation.ShellPresenter;
 
 import java.util.Hashtable;
 
-public class InsertCommand implements Command {
+public class UpdateCommand implements Command {
 
     @Override
     public int getArgsCount() {
@@ -53,9 +52,9 @@ public class InsertCommand implements Command {
             }
         }
         if (collection.get(humanBeing.getId()) == null) {
-            collection.put(humanBeing.getId(), humanBeing);
+            io.put("Элемент с id %s не найден. Воспользуйтесь командой insert (см help)".formatted(humanBeing.getId()));
         } else {
-            io.put("Элемент с id %s уже существует. Измените или воспользуйтесь командой update (см help)".formatted(humanBeing.getId()));
+            collection.replace(humanBeing.getId(), humanBeing);
         }
     }
 }
