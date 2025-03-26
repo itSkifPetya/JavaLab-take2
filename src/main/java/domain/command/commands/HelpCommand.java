@@ -18,7 +18,7 @@ public class HelpCommand implements Command {
         io.put("update {id}: обновить элемент по его id");
         io.put("remove_key {key}: удалить элемент из коллекции по его ключу");
         io.put("clear: очистить коллекцию");
-        io.put("save {file_name}: сохранить коллекцию в файл");
+        io.put("save {file_path}: сохранить коллекцию в файл");
         io.put("execute_script {file_path}: выполнить скрипт");
         io.put("exit: завершить программу без сохранения");
         io.put("history: вывести последние 5 команд");

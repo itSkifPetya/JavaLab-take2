@@ -29,7 +29,7 @@ public class Invoker {
         commandMap.put("remove_key", new RemoveKeyCommand());
         commandMap.put("clear", new ClearCommand());
         commandMap.put("save", new SaveCommand());
-        commandMap.put("execute_script", new ExecuteScriptCommand());
+        commandMap.put("execute_script", new ExecuteScriptCommand()); //TODO: не готово
         commandMap.put("exit", new ExitCommand());
         commandMap.put("history", new HistoryCommand());
         commandMap.put("replace_if_greater", new ReplaceIfGreaterCommand());

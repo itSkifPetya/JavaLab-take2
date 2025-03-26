@@ -60,12 +60,12 @@ public class Application {
             String[] inpArray = inp.split(" ");
             Command command = commandMap.get(inpArray[0]);
             if (command == null) {
-                io.put("Команда не распознана!");
+                io.put("Команда %s не распознана!".formatted(inpArray[0]));
                 continue;
             }
             historyKeeper.add(inpArray[0]);
             if (command.getArgsCount() != inpArray.length-1) {
-                io.put("Команда не имеет аргументов или количество аргументов не совпадает");
+                io.put("Команда %s не имеет аргументов или количество аргументов не совпадает".formatted(inpArray[0]));
                 continue;
             }
             command.execute(collection, inpArray);

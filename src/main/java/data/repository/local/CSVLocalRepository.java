@@ -88,6 +88,7 @@ public class CSVLocalRepository implements HumanBeingRepo {
 
                 // Разделяем строку на поля
                 String[] fields = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1); // Учитываем запятые внутри кавычек
+
                 // Парсим поля
                 Integer id = Integer.parseInt(fields[0]);
                 String name = fields[1];
@@ -101,6 +102,18 @@ public class CSVLocalRepository implements HumanBeingRepo {
                 long minutesOfWaiting = Long.parseLong(fields[9]);
                 WeaponType weaponType = WeaponType.valueOf(fields[10]);
                 Boolean carCool = fields[11].equals("null") ? null : Boolean.parseBoolean(fields[11]);
+
+//                String name = fields[0];
+//                int x = Integer.parseInt(fields[1]);
+//                double y = Double.parseDouble(fields[2]);
+//                LocalDate creationDate = LocalDate.parse(fields[4]);
+//                Boolean realHero = Boolean.parseBoolean(fields[4]);
+//                Boolean hasToothpick = Boolean.parseBoolean(fields[5]);
+//                double impactSpeed = Double.parseDouble(fields[6]);
+//                String soundtrackName = fields[7];
+//                long minutesOfWaiting = Long.parseLong(fields[8]);
+//                WeaponType weaponType = WeaponType.valueOf(fields[9]);
+//                Boolean carCool = fields[10].equals("null") ? null : Boolean.parseBoolean(fields[11]);
 
                 // Создаем вложенные объекты
                 Coordinates coordinates = new Coordinates(x, y);
