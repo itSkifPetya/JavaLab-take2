@@ -5,20 +5,19 @@ import java.util.Stack;
 
 public class HistoryKeeper {
     private static HistoryKeeper instance;
-    private Stack<String> history;
+    private Stack<String> history = new Stack<>();
 
     private HistoryKeeper() {}
 
     public static HistoryKeeper getInstance() {
         if (instance == null) {
-            return new HistoryKeeper();
-        } else {
-            return instance;
+            instance = new HistoryKeeper();
         }
+        return instance;
     }
 
     public void add(String command) {
-        history.add(command);
+        history.push(command);
     }
 
     public Stack<String> getHistory() {

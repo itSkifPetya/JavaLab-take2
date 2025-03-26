@@ -72,8 +72,11 @@ public class HumanBeing implements Comparable<HumanBeing> {
 
     @Override
     public int compareTo(HumanBeing other) {
-        return 1;
-//        return Double.compare(absoluteParameter, other.absoluteParameter);
+        if (this.impactSpeed > other.impactSpeed) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 
     public void setId(Integer id) {

@@ -32,6 +32,12 @@ public class Invoker {
         commandMap.put("execute_script", new ExecuteScriptCommand());
         commandMap.put("exit", new ExitCommand());
         commandMap.put("history", new HistoryCommand());
+        commandMap.put("replace_if_greater", new ReplaceIfGreaterCommand());
+        commandMap.put("remove_greater_key", new RemoveGreaterKeyCommand());
+        commandMap.put("sum_of_impact_speed", new SumOfImpactSpeedCommand());
+        commandMap.put("min_by_soundtrack_name", new MinBySoundtrackNameCommand());
+        commandMap.put("group_counting_by_has_toothpick", new GroupCountingByHasToothpickCommand());
+
     }
 
     public Map<String, Command> getCommandMap() {

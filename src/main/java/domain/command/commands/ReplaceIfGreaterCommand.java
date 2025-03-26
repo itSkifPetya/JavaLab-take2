@@ -4,23 +4,23 @@ import data.models.HumanBeingModel.Car;
 import data.models.HumanBeingModel.Coordinates;
 import data.models.HumanBeingModel.HumanBeing;
 import data.models.HumanBeingModel.WeaponType;
-import data.repository.local.CSVLocalRepository;
 import domain.command.Command;
 import presentation.ShellPresenter;
 
 import java.util.Hashtable;
 
-public class InsertCommand implements Command {
-
-    @Override
-    public int getArgsCount() {
-        return 1;
-    }
-
+public class ReplaceIfGreaterCommand implements Command {
     @Override
     public void execute(Hashtable<Integer, HumanBeing> collection, String[] args) {
+        Integer enteredKey = Integer.valueOf(args[1]);
+        HumanBeing homeBeing = collection.get(enteredKey);
         ShellPresenter io = ShellPresenter.getInstanse();
-//        io.put(collection.elements().toString());
+
+        if (homeBeing == null) {
+            io.put("Элемент с таким ключам отсутствует в коллекции. Используйте insert (см help)");
+            return;
+        }
+
         String name;
         Coordinates coordinates;
         Boolean realHero;
@@ -33,13 +33,17 @@ public class InsertCommand implements Command {
 
         HumanBeing humanBeing;
         while (true) {
+            impactSpeed = Double.parseDouble(io.get("Введите скорость в момент аварии (double) (определяющий параметр): "));
+            if (homeBeing.getImpactSpeed() > impactSpeed) {
+                io.put("Старое значение больше нового");
+                return;
+            }
             name = io.get("Введите имя: ");
             int coordX = Integer.parseInt(io.get("Введите X координату (int): "));
             double coordY = Double.parseDouble(io.get("Введите Y координату (double): "));
             coordinates = new Coordinates(coordX, coordY);
             realHero = Boolean.parseBoolean(io.get("Реальный герой (boolean)? "));
             hasToothpick = Boolean.parseBoolean(io.get("Есть зубочистка (boolean)? "));
-            impactSpeed = Double.parseDouble(io.get("Введите скорость в момент аварии (double): "));
             soundtrackName = io.get("Введите название трека: ");
             minutesOfWaiting = Long.parseLong(io.get("Введите время ожидания (long): "));
             weaponType = WeaponType.valueOf(io.get("Введите тип оружия: \nAXE\nPISTOL\nSHOTGUN\nMACHINE_GUN\nBAT\n"));
@@ -52,10 +56,11 @@ public class InsertCommand implements Command {
                 io.put(e.getMessage());
             }
         }
-        if (collection.get(humanBeing.getId()) == null) {
-            collection.put(humanBeing.getId(), humanBeing);
-        } else {
-            io.put("Элемент с id %s уже существует. Измените или воспользуйтесь командой update (см help)".formatted(humanBeing.getId()));
-        }
+        collection.put(humanBeing.getId(), humanBeing);
+    }
+
+    @Override
+    public int getArgsCount() {
+        return 1;
     }
 }

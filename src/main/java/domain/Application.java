@@ -11,9 +11,9 @@ import java.util.Map;
 
 public class Application {
     ShellPresenter io = ShellPresenter.getInstanse();
-    Hashtable<Integer, HumanBeing> collection;
     CSVLocalRepository repo = CSVLocalRepository.getInstance();
     Invoker invoker = Invoker.getInstance();
+    Hashtable<Integer, HumanBeing> collection;
     Map<String, Command> commandMap = invoker.getCommandMap();
     HistoryKeeper historyKeeper = HistoryKeeper.getInstance();
 
@@ -50,15 +50,19 @@ public class Application {
 
     private void interactOpt() {
         invoker.invokerInit();
-
         io.put("Вы в интерактивном режиме! Перед началом работы введите путь к файлу коллекции:");
-        String path = io.get("path: ");
+//        String path = io.get("path: ");
+        String path = "text.csv"; // поменять на проде
         collection = repo.getData(path);
         io.put("Коллекция загружена! Начните с команды help");
         while (true) {
             String inp = io.get("> ");
             String[] inpArray = inp.split(" ");
             Command command = commandMap.get(inpArray[0]);
+            if (command == null) {
+                io.put("Команда не распознана!");
+                continue;
+            }
             historyKeeper.add(inpArray[0]);
             if (command.getArgsCount() != inpArray.length-1) {
                 io.put("Команда не имеет аргументов или количество аргументов не совпадает");

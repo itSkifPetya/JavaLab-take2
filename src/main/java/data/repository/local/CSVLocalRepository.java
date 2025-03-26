@@ -37,9 +37,9 @@ public class CSVLocalRepository implements HumanBeingRepo {
         return strCollection;
     }
 
-    public void fileWriterInit(String name) {
+    public void fileWriterInit(String filepath) {
         try {
-            fileWriter = new FileWriter(name + ".csv");
+            fileWriter = new FileWriter(filepath);
             fileWriter.write("id,name,coordX,coordY,creationDate,realHero,hasToothpick,impactSpeed,soundtrackName,miutesOfWaiting,weaponType,car\n");
         } catch (IOException e) {
             System.out.println(e);
