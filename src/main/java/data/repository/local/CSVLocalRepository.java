@@ -217,7 +217,7 @@ public class CSVLocalRepository implements HumanBeingRepo {
                             impactSpeed, soundtrackName, minutesOfWaiting,
                             weaponType, car
                     );
-                    collection.put(id, human);
+                    collection.put(human.getId(), human);
 
                 } catch (ValidationException e) {
                     System.err.println("Ошибка в строке: " + line + " | " + e.getMessage());

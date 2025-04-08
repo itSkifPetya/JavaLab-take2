@@ -40,7 +40,6 @@ public class Application {
      * Точка входа в программу
      */
     public void start() {
-//        optionHandler();
         interactOpt();
     }
 
@@ -75,8 +74,8 @@ public class Application {
     private void interactOpt() {
         invoker.invokerInit();
         io.put("Вы в интерактивном режиме! Перед началом работы введите путь к файлу коллекции:");
-//        String path = io.get("path: ");
-        String path = "text.csv"; //TODO: поменять на проде
+        String path = io.get("path: ");
+//        String path = "text.csv"; //TODO: поменять на проде
         collection = repo.getData(path);
         io.put("Коллекция загружена! Начните с команды help");
         while (true) {
