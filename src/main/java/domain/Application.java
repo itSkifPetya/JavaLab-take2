@@ -9,6 +9,9 @@ import presentation.ShellPresenter;
 import java.util.Hashtable;
 import java.util.Map;
 
+/**
+ * Класс, отвечающий за приложение
+ */
 public class Application {
     ShellPresenter io = ShellPresenter.getInstanse();
     CSVLocalRepository repo = CSVLocalRepository.getInstance();
@@ -16,16 +19,34 @@ public class Application {
     Hashtable<Integer, HumanBeing> collection;
     Map<String, Command> commandMap = invoker.getCommandMap();
     HistoryKeeper historyKeeper = HistoryKeeper.getInstance();
+    private static Application instance;
 
-    public Application() {
+    private Application() {
 
     }
 
+    /**
+     * Реализация Singleton
+     * @return
+     */
+    public static Application getInstance() {
+        if (instance == null) {
+            instance = new Application();
+        }
+        return instance;
+    }
+
+    /**
+     * Точка входа в программу
+     */
     public void start() {
 //        optionHandler();
         interactOpt();
     }
 
+    /**
+     * Выбор опции
+     */
     private void optionHandler() {
         String opt;
         cycle:
@@ -48,11 +69,14 @@ public class Application {
         }
     }
 
+    /**
+     * Интерактивный режим
+     */
     private void interactOpt() {
         invoker.invokerInit();
         io.put("Вы в интерактивном режиме! Перед началом работы введите путь к файлу коллекции:");
 //        String path = io.get("path: ");
-        String path = "text.csv"; // поменять на проде
+        String path = "text.csv"; //TODO: поменять на проде
         collection = repo.getData(path);
         io.put("Коллекция загружена! Начните с команды help");
         while (true) {
@@ -74,6 +98,9 @@ public class Application {
 
     }
 
+    /**
+     * Режим админки
+     */
     private void adminOpt() {
         io.put("Вы в админке!");
         while (true) {

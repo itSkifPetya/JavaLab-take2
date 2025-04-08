@@ -8,9 +8,7 @@ public class CommandHandler {
     private static CommandHandler instance;
     private HashMap<String, Command> commands = new HashMap<>(16);
 
-    private CommandHandler() {
-
-    }
+    private CommandHandler() {}
 
     public static CommandHandler getInstance() {
         if (instance == null) {

@@ -1,5 +1,8 @@
 package data.models.HumanBeingModel;
 
+/**
+ * Модель класса Coordinates
+ */
 public class Coordinates {
     private int x;
     private double y;

@@ -4,8 +4,10 @@ import java.nio.ByteBuffer;
 import java.time.LocalDate;
 import java.util.UUID;
 
+/**
+ * Модель класса HumanBeing. С этим типом данных осуществляется работа в коллекции
+ */
 public class HumanBeing implements Comparable<HumanBeing> {
-
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -62,10 +64,24 @@ public class HumanBeing implements Comparable<HumanBeing> {
         this.car = car;
     }
 
-    public static HumanBeing parseHumanBeing(Integer id, String name, Coordinates coordinates, LocalDate creationDate, Boolean realHero, Boolean hasToothpick, double impactSpeed, String soundtrackName, long minutesOfWaiting, WeaponType weaponType, Car car) {
-        return new HumanBeing(id, name, coordinates, creationDate, realHero, hasToothpick, impactSpeed, soundtrackName, minutesOfWaiting, weaponType, car);
-    }
+//    public static HumanBeing parseHumanBeing(Integer id, String name, Coordinates coordinates, LocalDate creationDate, Boolean realHero, Boolean hasToothpick, double impactSpeed, String soundtrackName, long minutesOfWaiting, WeaponType weaponType, Car car) {
+//        return new HumanBeing(id, name, coordinates, creationDate, realHero, hasToothpick, impactSpeed, soundtrackName, minutesOfWaiting, weaponType, car);
+//    }
 
+    /**
+     * Возвращает новый HumanBeing. Используется при замещении в коллекции по ID
+     * @param id
+     * @param name
+     * @param coordinates
+     * @param realHero
+     * @param hasToothpick
+     * @param impactSpeed
+     * @param soundtrackName
+     * @param minutesOfWaiting
+     * @param weaponType
+     * @param car
+     * @return
+     */
     public static HumanBeing insertHumanBeing(Integer id, String name, Coordinates coordinates, Boolean realHero, Boolean hasToothpick, double impactSpeed, String soundtrackName, long minutesOfWaiting, WeaponType weaponType, Car car) {
         return new HumanBeing(id, name, coordinates, LocalDate.now(), realHero, hasToothpick, impactSpeed, soundtrackName, minutesOfWaiting, weaponType, car);
     }

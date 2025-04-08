@@ -15,7 +15,7 @@ public class Main {
 //        repo.writeData(collection);
 //        // Парсинг работает
 //        System.out.println(repo.getData("test.csv"));
-        Application app = new Application();
+        Application app = Application.getInstance();
         app.start();
 //        Scanner sc = new Scanner(System.in);
 //        var data = sc.nextLine();

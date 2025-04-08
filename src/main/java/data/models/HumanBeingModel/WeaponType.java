@@ -1,5 +1,8 @@
 package data.models.HumanBeingModel;
 
+/**
+ * Модель класса WeaponType
+ */
 public enum WeaponType {
     AXE,
     PISTOL,
